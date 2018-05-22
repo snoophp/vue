@@ -1,0 +1,35 @@
+{
+    "name": "snoophp/vue",
+	"description": "Vue.js integration in SnooPHP",
+	"keywords": [
+		"vue",
+		"js",
+		"javascript",
+		"framework",
+		"snoophp",
+		"sneppy"
+	],
+    "type": "library",
+	"license": "MIT",
+	"minimum-stability": "dev",
+	"support": {
+		"issues": "https://github.com/snoophp/vue/issues",
+        "source": "https://github.com/snoophp/vue"
+	},
+    "authors": [
+        {
+            "name": "Sneppy",
+            "email": "andrea.mecchia@mail.polimi.it"
+        }
+    ],
+    "require": {
+		"php": ">7.0",
+		"snoophp/http": ">=0.1",
+		"snoophp/utils": ">=0.1"
+	},
+	"autoload": {
+        "psr-4": {
+            "SnooPHP\\": "src/SnooPHP/"
+        }
+    }
+}
