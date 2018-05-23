@@ -1,4 +1,4 @@
-<p align="center"><img src="https://image.ibb.co/mHMgrm/snoophp.png" width="80"/> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Facebook_logo_%28square%29.png/600px-Facebook_logo_%28square%29.png" height="80"/></p>
+<p align="center"><img src="https://image.ibb.co/mHMgrm/snoophp.png" width="80"/> <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png" height="80"/></p>
 
 # SnooPHP Vue
 
