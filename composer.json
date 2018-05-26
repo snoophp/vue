@@ -28,6 +28,9 @@
 		"snoophp/utils": "*"
 	},
 	"autoload": {
+		"files": [
+			"src/SnooPHP/Vue/helpers.php"
+		],
         "psr-4": {
             "SnooPHP\\": "src/SnooPHP/"
         }
