@@ -2,8 +2,9 @@
 
 namespace SnooPHP\Vue;
 
+use SnooPHP\Utils\Utils;
 use SnooPHP\Http\Request;
-use SnooPHP\Utils;
+use SnooPHP\Http\Response;
 
 /**
  * Root component
@@ -14,6 +15,11 @@ class Vue extends Component
 	 * @var Component[] $components list of registered component
 	 */
 	protected $components = [];
+
+	/**
+	 * @const FRAGMENT_DIR resource directory of vue fragments
+	 */
+	const FRAGMENT_DIR = "tmp/";
 
 	/**
 	 * Register component globally
@@ -76,8 +82,8 @@ class Vue extends Component
 
 		// Get name and file paths
 		$name		= str_replace("/", ".", path_relative($this->file, path("views/")));
-		$scriptFile	= path("resources/tmp/$name.js");
-		$styleFile	= path("resources/tmp/$name.css");
+		$scriptFile	= path("resources/".static::FRAGMENT_DIR."$name.js");
+		$styleFile	= path("resources/".static::FRAGMENT_DIR."$name.css");
 
 		// We're not caching scripts, otherwise we would lose php dynamic content
 		$script = "";
@@ -112,12 +118,15 @@ class Vue extends Component
 			// I specified, write style and script inline
 			write_file($styleFile, $style);
 		}
-
+		else
+			// Read style
+			$style = read_file($styleFile);
 	
 		// Link externally
-		return str_replace('</head>',
-		'<script type="text/javascript" src="/tmp/'.$name.'.js" defer></script>
-		<link rel="stylesheet" type="text/css" href="/tmp/'.$name.'.css" media="none" onload="media = \'all\'"/>', $document);
+		$fragmentsHtml = '<script type="text/javascript" src="/'.static::FRAGMENT_DIR.$name.'.js?time='.time().'" defer></script>';
+		if (!empty($style)) $fragmentsHtml .= '<link rel="stylesheet" type="text/css" href="/'.static::FRAGMENT_DIR.$name.'.css" media="none" onload="media = \'all\'"/>';
+		$fragmentsHtml .= '</head>';
+		return str_replace('</head>', $fragmentsHtml, $document);
 	}
 	
 	/**
@@ -134,7 +143,9 @@ class Vue extends Component
 		// Get request
 		$request = $request ?: Request::current();
 		
+		// Create vue, register and return document
 		$vue = new Vue(path("views/$file.php"), $args, $request);
-		return new static($vue->document());
+		$GLOBALS["vue"] = $vue;
+		return new Response($vue->document());
 	}
 }

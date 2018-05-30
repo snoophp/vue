@@ -2,8 +2,8 @@
 
 namespace SnooPHP\Vue;
 
+use SnooPHP\Utils\Utils;
 use SnooPHP\Http\Request;
-use SnooPHP\Utils;
 
 /**
  * Methods to handle vue components
@@ -155,7 +155,7 @@ class Component
 	{
 		if (!empty($this->document) && preg_match("~<template>(.+)</template>~s", $this->document, $matches))
 		{
-			$content		= trim($matches[1]);
+			$content = trim($matches[1]);
 
 			// Add scope
 			$this->template	= preg_replace("~(<[_A-Za-z][_\-\.A-Za-z0-9]*)([^>]*/?>)~", "$1 ".static::SCOPE_ATTRIBUTE.$this->id."$2", $content);
@@ -274,7 +274,7 @@ class Component
 	public static function create($file, array $args, Request $request = null)
 	{
 		$request	= $request ?: Request::current();
-		$file		= substr($file, 0, 2) === "@/" ? path("views/components/".substr($file, 2).".vue.php") : $file;
+		$file		= substr($file, 0, 2) === "@/" ? path("views/components/".substr($file, 2).".vue.php") : $file.".vue.php";
 		$component	= new Component($file, $args, $request);
 		if ($component->valid())
 		{
