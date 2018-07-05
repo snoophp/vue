@@ -2,7 +2,6 @@
 
 namespace SnooPHP\Vue;
 
-use SnooPHP\Utils\Utils;
 use SnooPHP\Http\Request;
 
 /**
@@ -205,7 +204,7 @@ class Component
 							$props["scoped"] = !empty($attr[2]) ? (bool)$attr[2] : true;
 				
 				// Compile style
-				$compiled = Utils::compileStyle($styleContent, $props["lang"]);
+				$compiled = compile_style($styleContent, $props["lang"]);
 
 				// Scope style
 				if ($props["scoped"])

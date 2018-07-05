@@ -11,8 +11,6 @@ if (!function_exists("vue_component"))
 	 * @param string	$file		vue component filename
 	 * @param array		$args		set of arguments to pass to the component
 	 * @param Request	$request	specify if not current request
-	 * 
-	 * @see SnooPHP\Utils::vueComponent()
 	 */
 	function vue_component($file, array $args = [], Request $request = null)
 	{
